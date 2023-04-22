@@ -1,11 +1,25 @@
 name: Events Demo 1
 on:
   # this workflow will run whenever a pull_request is opened or edited but it will not run when a pull request is closed
-  #EVENT-1
-  pull_request:
+  #EVENT-1  :ACTIVITY TYPES
+  pull_request: #We can also add event filter to pull request
     types: [opened, edited] #reserved keyword where we specify the activity type : opened,closed etc.
+    branches:
+      - main
+      - "dev-*" #branches starting with dev- ex- dev-new or dev-this-is-new
+      - "feat/**" #branches starting with feat/ and more slash ex: feat/new or feat/new/button
   #EVENT-2
   workflow_dispatch: #we need to add a colon with the name if we are not specifying anything for the event
+  #EVENT-3 : EVENT FILTERS
+  push:
+    #push to all this branches will trigger workflow and other branches won't triggger workflow
+    branches:
+      - main
+      - "dev-*" #branches starting with dev- ex- dev-new or dev-this-is-new
+      - "feat/**" #branches starting with feat/ and more slash ex: feat/new or feat/new/button
+    paths-ignore:
+      - ".github/workflows/*" #ignore triggering of workflow if anything is changed in this path
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
