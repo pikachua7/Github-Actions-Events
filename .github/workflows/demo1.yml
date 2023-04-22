@@ -1,5 +1,11 @@
 name: Events Demo 1
-on: ...
+on:
+  # this workflow will run whenever a pull_request is opened or edited but it will not run when a pull request is closed
+  #EVENT-1
+  pull_request:
+    types: [opened, edited] #reserved keyword where we specify the activity type : opened,closed etc.
+  #EVENT-2
+  workflow_dispatch: #we need to add a colon with the name if we are not specifying anything for the event
 jobs:
   deploy:
     runs-on: ubuntu-latest
